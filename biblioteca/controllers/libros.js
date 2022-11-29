@@ -13,3 +13,22 @@ router.get('/',async (req,res)=>{
             res.status(500).send(err);
         })
 })
+
+router.post('/', async (req, res) => {
+    Libros.create({
+        usuarioId: req.body.usuarioId,
+        nombre: req.body.nombre,
+        categoria: req.body.categoria,
+        autor: req.body.autor,
+        fechaInPrestamo: req.body.fechaInPrestamo,
+        fechaFinPrestamo: req.body.fechaFinPrestamo
+    })
+    .then(data => {
+        res.send(data);
+    })
+    .catch(err => {
+        res.status(500).send(err);
+    })  
+})
+
+module.exports = router
