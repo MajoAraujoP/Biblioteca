@@ -32,26 +32,38 @@ router.post('/', async (req, res) => {
 })
 
 router.put('/:id', (req,res) => { 
-        Task.update({ 
-            usuarioId: req.body.usuarioId,
-            nombre: req.body.nombre,
-            categoria: req.body.categoria,
-            autor: req.body.autor,
-            fechaInPrestamo: req.body.fechaInPrestamo,
-            fechaFinPrestamo: req.body.fechaFinPrestamo }, {
-            where: {
-                usuarioId: Libros.usuarioId,
-                nombre: Libros.nombre,
-                categoria: Libros.categoria,
-                autor: Libros.autor,
-                fechaInPrestamo: Libros.fechaInPrestamo,
-                fechaFinPrestamo: Libros.fechaFinPrestamo
-            }
+        const id = req.params.id;
+        Libros.update(
+            { 
+                usuarioId: req.body.usuarioId,
+                nombre: req.body.nombre,
+                categoria: req.body.categoria,
+                autor: req.body.autor,
+                fechaInPrestamo: req.body.fechaInPrestamo,
+                fechaFinPrestamo: req.body.fechaFinPrestamo 
+            },
+                {
+                where: {
+                    id:id
+                }
+            }).then((num)=>{
+                if(num > 0){
+                    res.send({
+                        message: "El libro se actualizo con exito"
+                      })
+                } else {
+                    res.status(404).send({
+                        message: "No existe un libro con ese id"
+                      })
+                }
+            })
             .catch(err => {
                 res.status(500).send(err);
+            })
         })
-    })
-})
+
+
+
 router.delete('/:id', (req,res) => {
     const id = req.params.id;
       Libros.destroy({
