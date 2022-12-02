@@ -1,9 +1,8 @@
-import React from 'react';
 import './App.css';
-import Form from './COMPONENTS/adminView/form';
-import List from './COMPONENTS/adminView/list';
+import React, { useEffect, useState } from 'react';
 import {BrowserRouter, Routes, Route, } from 'react-router-dom'
-import Input from './COMPONENTS/adminView/input';
+import Home from './COMPONENTS/HOME/home';
+import Login from './COMPONENTS/login';
 
 
 
@@ -14,13 +13,11 @@ function App() {
     <Routes>
       <Route path="/"
       element={
-        <ListOfPokemon
-        getPokemon={getPokemon}/>
+        <Login/>
       }/>
       <Route path="/:id"
       element={
-        <CharactersPokemon
-        list={getPokemon}/>
+        <Home/>
       }/>
     </Routes>
   </BrowserRouter>
