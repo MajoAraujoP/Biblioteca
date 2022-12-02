@@ -1,25 +1,50 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Form from './COMPONENTS/adminView/form';
+import List from './COMPONENTS/adminView/list';
+import {BrowserRouter, Routes, Route, } from 'react-router-dom'
+import Input from './COMPONENTS/adminView/input';
+
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/"
+      element={
+        <ListOfPokemon
+        getPokemon={getPokemon}/>
+      }/>
+      <Route path="/:id"
+      element={
+        <CharactersPokemon
+        list={getPokemon}/>
+      }/>
+    </Routes>
+  </BrowserRouter>
+  
   );
 }
 
 export default App;
+
+
+/*return (
+  <BrowserRouter>
+    <Routes>
+      <Route path="/"
+      element={
+        <ListOfPokemon
+        getPokemon={getPokemon}/>
+      }/>
+      <Route path="/:id"
+      element={
+        <CharactersPokemon
+        list={getPokemon}/>
+      }/>
+    </Routes>
+  </BrowserRouter>
+);*/
+
